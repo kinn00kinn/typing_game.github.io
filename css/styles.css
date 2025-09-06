@@ -13,6 +13,18 @@
   --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto;
 }
 
+/* Light Theme */
+body.light-theme {
+  --bg: #F0F2F5;
+  --panel: rgba(255, 255, 255, 0.8);
+  --panel-border: rgba(0, 0, 0, 0.1);
+  --neon: #007BFF;
+  --accent: #28A745;
+  --muted: #6C757D;
+  --danger: #DC3545;
+  --text: #343A40;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -58,6 +70,19 @@ body {
   font-size: 1.5rem;
   color: var(--neon);
   text-shadow: 0 0 5px var(--neon);
+}
+
+.github-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  margin-left: 1rem;
+  transition: color 0.2s ease;
+}
+
+.github-link:hover {
+  color: var(--neon);
 }
 
 #settings-button {
@@ -108,6 +133,9 @@ body {
   padding: 1rem 1.5rem;
   border-radius: var(--radius);
   max-width: 90%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .system-bubble {
@@ -278,6 +306,43 @@ body {
     font-family: var(--font-mono);
     color: var(--text);
     font-weight: bold;
+}
+
+.chart-container {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.full-screen-panel {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.history-panel {
+    background-color: var(--bg);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 3rem;
+    width: 100%;
+    max-width: 800px; /* Wider for history chart */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.chart-container-large {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    margin-top: 1rem;
 }
 
 /* Settings Panel */

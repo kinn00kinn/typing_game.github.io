@@ -20,6 +20,7 @@
                     <path d="M2 12L12 17L22 12" stroke="var(--neon)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 <h1>AncientTech</h1>
+                <a href="https://github.com/kinn00kinn/typing_game.github.io" target="_blank" class="github-link">GitHub</a>
             </div>
             <div class="settings">
                 <button id="settings-button" aria-label="Settings">
@@ -28,6 +29,8 @@
                 </button>
                 <div id="settings-panel" class="hidden">
                     <button id="mute-button">Mute Audio</button>
+                    <button id="theme-toggle-button">Toggle Theme</button>
+                    <button id="history-button">Game History</button>
                 </div>
             </div>
         </header>
@@ -96,11 +99,26 @@
                     <span>WPM</span>
                     <span id="results-wpm">0</span>
                 </div>
+                <div class="chart-container">
+                    <canvas id="results-chart"></canvas>
+                </div>
                 <button id="play-again-button">Play Again</button>
+                <button id="share-twitter-button">Share on Twitter</button>
+            </div>
+        </div>
+
+        <div id="history-screen" class="full-screen-panel hidden">
+            <div class="history-panel results-panel">
+                <h2>Game History</h2>
+                <div class="chart-container-large">
+                    <canvas id="history-chart"></canvas>
+                </div>
+                <button id="close-history-button">Close</button>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/main.js" type="module"></script>
 </body>
 </html>

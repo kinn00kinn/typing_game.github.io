@@ -39,6 +39,7 @@ const state = {
     totalCorrect: 0,
     difficulty: 'normal',
     intervalId: null,
+    lastGameResults: null,
 };
 
 /**
@@ -55,8 +56,10 @@ async function init() {
             throw new Error('Invalid phrases data format.');
         }
         state.phrases = data.phrases;
+        console.log(`Loaded ${state.phrases.length} phrases.`);
     } catch (error) {
         console.error("Failed to load phrases:", error);
+        // Re-throw to ensure Promise.all catches it
         throw error;
     }
 
@@ -86,7 +89,7 @@ function startGame() {
     state.intervalId = setInterval(tick, 1000);
     renderer.toggleStartScreen(false);
     inputManager.focus();
-    audioManager.play('start');
+    // audioManager.play('start');
 }
 
 /**
@@ -112,6 +115,14 @@ function endGame() {
         accuracy: accuracy,
         wpm: wpm,
     });
+
+    state.lastGameResults = {
+        score: Math.round(state.score),
+        accuracy: accuracy,
+        wpm: wpm,
+    };
+
+    storageManager.saveGameResult(state.lastGameResults);
 }
 
 /**
@@ -130,6 +141,7 @@ function tick() {
  */
 function nextPhrase() {
     if (state.phrases.length === 0) {
+        console.error("nextPhrase called with empty phrases array.");
         renderer.renderNewPhrase("Error: No phrases loaded. Check server and file paths.");
         console.error("Cannot start game: phrases array is empty.");
         if(state.intervalId) clearInterval(state.intervalId);
@@ -242,4 +254,5 @@ function updateHUD() {
 export const gameController = {
     init,
     startGame,
+    getLastGameResults: () => state.lastGameResults,
 };

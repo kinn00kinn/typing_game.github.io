@@ -20,10 +20,17 @@ const elements = {
     resultsScore: document.getElementById('results-score'),
     resultsAccuracy: document.getElementById('results-accuracy'),
     resultsWpm: document.getElementById('results-wpm'),
+    resultsChart: document.getElementById('results-chart'),
     // Settings Panel elements
     settingsButton: document.getElementById('settings-button'),
     settingsPanel: document.getElementById('settings-panel'),
     muteButton: document.getElementById('mute-button'),
+    themeToggleButton: document.getElementById('theme-toggle-button'),
+    shareTwitterButton: document.getElementById('share-twitter-button'),
+    historyButton: document.getElementById('history-button'),
+    historyScreen: document.getElementById('history-screen'),
+    historyChart: document.getElementById('history-chart'),
+    closeHistoryButton: document.getElementById('close-history-button'),
 };
 
 /**
@@ -93,6 +100,82 @@ function clearMessages() {
     elements.messages.innerHTML = '';
 }
 
+let chartInstance = null;
+
+/**
+ * Renders a chart with the game results.
+ * @param {object} stats - { score, accuracy, wpm }
+ */
+function renderResultsChart({ accuracy, wpm }) {
+    const ctx = elements.resultsChart.getContext('2d');
+
+    if (chartInstance) {
+        chartInstance.destroy(); // Destroy existing chart before creating a new one
+    }
+
+    chartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['WPM', 'Accuracy'],
+            datasets: [{
+                label: 'Your Performance',
+                data: [wpm, accuracy],
+                backgroundColor: [
+                    'rgba(0, 255, 209, 0.6)', // Neon for WPM
+                    'rgba(124, 255, 0, 0.6)'  // Accent for Accuracy
+                ],
+                borderColor: [
+                    'rgba(0, 255, 209, 1)',
+                    'rgba(124, 255, 0, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    },
+                    ticks: {
+                        color: 'var(--text)'
+                    }
+                },
+                x: {
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    },
+                    ticks: {
+                        color: 'var(--text)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y + (context.label === 'Accuracy' ? '%' : '');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
 /**
  * Displays the results screen with final stats.
  * @param {object} stats - { score, accuracy, wpm }
@@ -101,6 +184,7 @@ function displayResults({ score, accuracy, wpm }) {
     elements.resultsScore.textContent = score;
     elements.resultsAccuracy.textContent = `${accuracy.toFixed(1)}%`;
     elements.resultsWpm.textContent = wpm.toFixed(1);
+    renderResultsChart({ accuracy, wpm }); // Render the chart
     elements.resultsScreen.style.display = 'flex';
 }
 
@@ -131,6 +215,129 @@ function updateMuteButtonText(isMuted) {
     }
 }
 
+/**
+ * Toggles the theme between light and dark.
+ * @param {boolean} isLight - True to set light theme, false for dark.
+ */
+function toggleTheme(isLight) {
+    if (isLight) {
+        document.body.classList.add('light-theme');
+    } else {
+        document.body.classList.remove('light-theme');
+    }
+}
+
+/**
+ * Shares game results on Twitter.
+ * @param {object} stats - { score, accuracy, wpm }
+ */
+function shareOnTwitter({ score, accuracy, wpm }) {
+    const text = `I scored ${score} points with ${accuracy.toFixed(1)}% accuracy and ${wpm.toFixed(1)} WPM in AncientTech Typing Game! Can you beat my score? #AncientTechTypingGame`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`;
+    window.open(url, '_blank');
+}
+
+let historyChartInstance = null;
+
+/**
+ * Renders a line chart with historical game results.
+ * @param {Array<object>} results - An array of historical game results.
+ */
+function renderHistoricalChart(results) {
+    const ctx = elements.historyChart.getContext('2d');
+
+    if (historyChartInstance) {
+        historyChartInstance.destroy();
+    }
+
+    const labels = results.map((_, index) => `Game ${index + 1}`);
+    const wpmData = results.map(r => r.wpm);
+    const accuracyData = results.map(r => r.accuracy);
+
+    historyChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'WPM',
+                    data: wpmData,
+                    borderColor: 'var(--neon)',
+                    backgroundColor: 'rgba(0, 255, 209, 0.2)',
+                    tension: 0.3,
+                    fill: true,
+                },
+                {
+                    label: 'Accuracy',
+                    data: accuracyData,
+                    borderColor: 'var(--accent)',
+                    backgroundColor: 'rgba(124, 255, 0, 0.2)',
+                    tension: 0.3,
+                    fill: true,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    },
+                    ticks: {
+                        color: 'var(--text)'
+                    }
+                },
+                x: {
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    },
+                    ticks: {
+                        color: 'var(--text)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'var(--text)'
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y + (context.dataset.label === 'Accuracy' ? '%' : '');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+/**
+ * Shows the historical results screen.
+ */
+function showHistoryScreen() {
+    elements.historyScreen.classList.remove('hidden');
+}
+
+/**
+ * Hides the historical results screen.
+ */
+function hideHistoryScreen() {
+    elements.historyScreen.classList.add('hidden');
+}
+
 export const renderer = {
     renderNewPhrase,
     renderUserMessage,
@@ -144,5 +351,9 @@ export const renderer = {
     hideResults,
     toggleSettingsPanel,
     updateMuteButtonText,
+    toggleTheme,
+    shareOnTwitter,
+    showHistoryScreen,
+    hideHistoryScreen,
     focusInput: () => elements.hiddenInput.focus(),
 };
