@@ -13,13 +13,27 @@ import { storageManager } from './storageManager.js';
 
 const GAME_DURATION = 60; // seconds
 
+// Scoring constants from design document
+const SCORING = {
+    basePoint: 10,
+    missPenalty: 15,
+    timeBonusFactor: 200,
+    comboMultiplier: 0.02,
+    difficultyFactor: {
+        easy: 0.8,
+        normal: 1,
+        hard: 1.2,
+        lunatic: 1.5
+    }
+};
+
 const state = {
     status: 'ready', // ready, playing, finished
     phrases: [],
     currentPhrase: null,
     timer: GAME_DURATION,
     score: 0,
-    misses: 0,
+    misses: 0, // Per-phrase misses
     combo: 0,
     totalTyped: 0,
     totalCorrect: 0,
@@ -43,7 +57,6 @@ async function init() {
         state.phrases = data.phrases;
     } catch (error) {
         console.error("Failed to load phrases:", error);
-        // Re-throw the error to be caught by Promise.all
         throw error;
     }
 
@@ -85,17 +98,20 @@ function endGame() {
     audioManager.play('end');
 
     const accuracy = state.totalTyped > 0 ? (state.totalCorrect / state.totalTyped) * 100 : 0;
+    // A standard "word" is 5 characters. WPM = (total chars / 5) / (time in minutes)
+    const wpm = (state.totalCorrect / 5) / (GAME_DURATION / 60);
+
     const completedQuests = questsManager.check('game_end', { 
         difficulty: state.difficulty,
         accuracy: accuracy
     });
     handleCompletedQuests(completedQuests);
 
-    // Final message
-    renderer.renderNewPhrase(`Game Over! Final Score: ${state.score}`);
-    renderer.toggleStartScreen(true);
-    // Modify start button for replay
-    document.getElementById('start-button').textContent = 'Play Again';
+    renderer.displayResults({
+        score: Math.round(state.score),
+        accuracy: accuracy,
+        wpm: wpm,
+    });
 }
 
 /**
@@ -116,7 +132,6 @@ function nextPhrase() {
     if (state.phrases.length === 0) {
         renderer.renderNewPhrase("Error: No phrases loaded. Check server and file paths.");
         console.error("Cannot start game: phrases array is empty.");
-        // Stop the game from proceeding
         if(state.intervalId) clearInterval(state.intervalId);
         state.status = 'finished';
         renderer.toggleStartScreen(true);
@@ -126,21 +141,25 @@ function nextPhrase() {
     inputManager.clear();
     renderer.clearInputDisplay();
 
-    // Get a random phrase that is not the same as the current one
     let newPhrase;
     do {
         newPhrase = state.phrases[Math.floor(Math.random() * state.phrases.length)];
     } while (state.phrases.length > 1 && newPhrase?.id === state.currentPhrase?.id);
     
     state.currentPhrase = newPhrase;
+    state.misses = 0; // Reset per-phrase misses
 
     if (!state.currentPhrase) {
         renderer.renderNewPhrase("Error: Failed to select a new phrase.");
-        console.error("Could not get a new phrase from the phrases array.", state.phrases);
         return;
     }
 
+    // Check for special character quest
+    const questResult = questsManager.check('phrase_start', { text: state.currentPhrase.text });
+    handleCompletedQuests(questResult);
+
     renderer.renderNewPhrase(state.currentPhrase.text);
+    updateHUD();
 }
 
 /**
@@ -150,22 +169,24 @@ function nextPhrase() {
 function handleInput(typedText) {
     if (state.status !== 'playing') return;
 
-    const phraseText = state.currentPhrase.text;
-    renderer.updateInputDisplay(phraseText, typedText);
+    renderer.updateInputDisplay(state.currentPhrase.text, typedText);
 
     const lastCharIndex = typedText.length - 1;
     const lastTypedChar = typedText[lastCharIndex];
-    const correctChar = phraseText[lastCharIndex];
+    const correctChar = state.currentPhrase.text[lastCharIndex];
 
     if (lastTypedChar === correctChar) {
         state.combo++;
-        state.score += 10; // Base score per char
+        const difficultyFactor = SCORING.difficultyFactor[state.difficulty] || 1;
+        const comboMultiplier = 1 + (state.combo * SCORING.comboMultiplier);
+        const charScore = SCORING.basePoint * difficultyFactor * comboMultiplier;
+        state.score += charScore;
         state.totalCorrect++;
         audioManager.play('type');
     } else {
         state.combo = 0;
         state.misses++;
-        state.score -= 5; // Penalty
+        state.score -= SCORING.missPenalty;
         audioManager.play('miss');
     }
     state.totalTyped++;
@@ -182,15 +203,19 @@ function handleInput(typedText) {
 function handleCommit(typedText) {
     if (state.status !== 'playing') return;
 
-    const phraseText = state.currentPhrase.text;
-    if (typedText === phraseText) {
+    if (typedText === state.currentPhrase.text) {
         audioManager.play('success');
-        state.score += 100; // Bonus for completing a phrase
         
+        // Add time bonus
+        const timeBonus = Math.floor((state.timer / GAME_DURATION) * SCORING.timeBonusFactor);
+        state.score += timeBonus;
+
         const questResult = questsManager.check('phrase_complete', { misses: state.misses });
         handleCompletedQuests(questResult);
 
-        state.misses = 0; // Reset misses for the next phrase quest
+        // Render the user's successful input before getting the next phrase
+        renderer.renderUserMessage(typedText);
+
         nextPhrase();
     }
 }
@@ -208,7 +233,7 @@ function handleCompletedQuests(completedQuests) {
 function updateHUD() {
     renderer.updateHUD({
         timer: state.timer,
-        score: state.score,
+        score: Math.round(state.score),
         misses: state.misses,
         combo: state.combo,
     });

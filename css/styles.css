@@ -234,6 +234,106 @@ body {
     text-shadow: none;
 }
 
+#results-screen {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.results-panel {
+    background-color: var(--bg);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 3rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.results-panel h2 {
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    color: var(--neon);
+    margin-bottom: 1rem;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.25rem;
+}
+
+.result-item span:first-child {
+    color: var(--muted);
+}
+
+.result-item span:last-child {
+    font-family: var(--font-mono);
+    color: var(--text);
+    font-weight: bold;
+}
+
+/* Settings Panel */
+#settings-panel {
+    position: absolute;
+    top: 100%; /* Position below the settings button */
+    right: 0;
+    background-color: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 150px;
+    z-index: 101;
+}
+
+#settings-panel button {
+    background-color: rgba(0,0,0,0.2);
+    color: var(--text);
+    border: 1px solid var(--panel-border);
+    border-radius: 4px;
+    padding: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#settings-panel button:hover {
+    background-color: rgba(0,0,0,0.4);
+}
+
+.hidden {
+    display: none !important;
+}
+
+#play-again-button {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--bg);
+    background-color: var(--accent);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+}
+
+#play-again-button:hover {
+    background-color: var(--neon);
+    box-shadow: 0 0 20px var(--neon);
+}
+
 /* Responsive Layout */
 @media (max-width: 768px) {
   #game-container {

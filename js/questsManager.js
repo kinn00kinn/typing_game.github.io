@@ -85,6 +85,15 @@ function check(eventType, data) {
                     questCompleted = true;
                 }
                 break;
+
+            case 'special_chars':
+                if (eventType === 'phrase_start') {
+                    const hasSpecialChar = quest.condition.chars.some(char => data.text.includes(char));
+                    if (hasSpecialChar) {
+                        questCompleted = true;
+                    }
+                }
+                break;
         }
 
         if (questCompleted) {

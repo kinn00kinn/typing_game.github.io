@@ -26,6 +26,9 @@
                     <!-- Placeholder for settings icon -->
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.48.48 0 0 0-.58-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41H9.18a.48.48 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.48.48 0 0 0-.58.22L2.03 8.81a.49.49 0 0 0 .12.61l2.03 1.58c-.05.3-.07.64-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.58.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54a.48.48 0 0 0 .48.41h3.64a.48.48 0 0 0 .48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.21.08.46 0 .58-.22l1.92-3.32a.49.49 0 0 0-.12-.61l-2.01-1.58zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" fill="var(--neon)"/></svg>
                 </button>
+                <div id="settings-panel" class="hidden">
+                    <button id="mute-button">Mute Audio</button>
+                </div>
             </div>
         </header>
 
@@ -76,6 +79,25 @@
         
         <div id="start-screen">
             <button id="start-button">Start Game</button>
+        </div>
+
+        <div id="results-screen" style="display: none;">
+            <div class="results-panel">
+                <h2>Results</h2>
+                <div class="result-item">
+                    <span>Score</span>
+                    <span id="results-score">0</span>
+                </div>
+                <div class="result-item">
+                    <span>Accuracy</span>
+                    <span id="results-accuracy">0%</span>
+                </div>
+                <div class="result-item">
+                    <span>WPM</span>
+                    <span id="results-wpm">0</span>
+                </div>
+                <button id="play-again-button">Play Again</button>
+            </div>
         </div>
     </div>
 
