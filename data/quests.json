@@ -1,0 +1,75 @@
+
+{
+  "quests": [
+    {
+      "id": "q001",
+      "description": "Complete 1 phrase without any mistakes.",
+      "type": "no_miss",
+      "condition": { "count": 1 },
+      "reward": { "scoreBonus": 100 }
+    },
+    {
+      "id": "q002",
+      "description": "Achieve a combo of 25.",
+      "type": "combo",
+      "condition": { "target": 25 },
+      "reward": { "scoreBonus": 250 }
+    },
+    {
+      "id": "q003",
+      "description": "Type 200 characters within 60 seconds.",
+      "type": "speed",
+      "condition": { "chars": 200, "time": 60 },
+      "reward": { "scoreBonus": 300 }
+    },
+    {
+      "id": "q004",
+      "description": "Finish a round on HARD difficulty.",
+      "type": "difficulty_specific",
+      "condition": { "difficulty": "hard", "count": 1 },
+      "reward": { "scoreBonus": 500 }
+    },
+    {
+      "id": "q005",
+      "description": "Complete 5 phrases in a single game.",
+      "type": "phrases_completed",
+      "condition": { "count": 5 },
+      "reward": { "scoreBonus": 150 }
+    },
+    {
+      "id": "q006",
+      "description": "Achieve an accuracy of 98% or higher in a round.",
+      "type": "accuracy",
+      "condition": { "target": 98 },
+      "reward": { "scoreBonus": 400 }
+    },
+    {
+      "id": "q007",
+      "description": "Complete 3 phrases in a row without any mistakes.",
+      "type": "no_miss_streak",
+      "condition": { "count": 3 },
+      "reward": { "scoreBonus": 750 }
+    },
+    {
+      "id": "q008",
+      "description": "Finish a round on LUNATIC difficulty.",
+      "type": "difficulty_specific",
+      "condition": { "difficulty": "lunatic", "count": 1 },
+      "reward": { "scoreBonus": 1000, "badge": "Lunatic" }
+    },
+    {
+      "id": "q009",
+      "description": "Type a phrase containing special characters like ';' or '{'.",
+      "type": "special_chars",
+      "condition": { "chars": [";", "{", "}", "(", ")"] },
+      "reward": { "scoreBonus": 200 }
+    },
+    {
+      "id": "q010",
+      "description": "Achieve a combo of 50.",
+      "type": "combo",
+      "condition": { "target": 50 },
+      "reward": { "scoreBonus": 1000, "badge": "Combo Master" }
+    }
+  ]
+}

@@ -1,0 +1,261 @@
+
+:root {
+  --bg: #07080A;
+  --panel: rgba(255, 255, 255, 0.03);
+  --panel-border: rgba(255, 255, 255, 0.1);
+  --neon: #00FFD1;
+  --accent: #7CFF00;
+  --muted: #9BD7D0;
+  --danger: #FF5C5C;
+  --text: #E0F2F1;
+  --radius: 12px;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 16px;
+}
+
+#game-container {
+  width: 100%;
+  max-width: 1200px;
+  height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+#game-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#game-header h1 {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  color: var(--neon);
+  text-shadow: 0 0 5px var(--neon);
+}
+
+#settings-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+#settings-button svg {
+  transition: transform 0.3s ease;
+}
+#settings-button:hover svg {
+  transform: rotate(90deg);
+  filter: drop-shadow(0 0 5px var(--neon));
+}
+
+
+#main-content {
+  display: flex;
+  gap: 1.5rem;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+#chat-pane {
+  flex: 7; /* 70% */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+#messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+
+.system-bubble, .user-bubble {
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+  max-width: 90%;
+}
+
+.system-bubble {
+  background-color: rgba(0, 255, 209, 0.05);
+  border: 1px solid rgba(0, 255, 209, 0.2);
+  align-self: flex-start;
+}
+
+.user-bubble {
+  background-color: rgba(124, 255, 0, 0.05);
+  border: 1px solid rgba(124, 255, 0, 0.2);
+  align-self: flex-end;
+  color: var(--accent);
+  min-height: 2.5em;
+}
+
+.char.correct {
+  color: var(--accent);
+}
+
+.char.incorrect {
+  color: var(--danger);
+  text-decoration: underline;
+}
+
+.cursor {
+  display: inline-block;
+  background-color: var(--neon);
+  width: 10px;
+  margin-left: 2px;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+#hidden-input {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  opacity: 0;
+}
+
+#hud {
+  flex: 3; /* 30% */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hud-panel {
+  background-color: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.hud-panel h3 {
+  font-family: var(--font-mono);
+  color: var(--neon);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.hud-panel p, .hud-panel span, .hud-panel li {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+}
+#quest-list {
+    list-style: none;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+#quest-list li.completed {
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+#difficulty-select {
+    width: 100%;
+    background-color: rgba(0,0,0,0.2);
+    color: var(--text);
+    border: 1px solid var(--panel-border);
+    border-radius: 4px;
+    padding: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+}
+#difficulty-select:focus {
+    outline: 1px solid var(--neon);
+}
+
+#start-screen {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+#start-button {
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    color: var(--bg);
+    background-color: var(--neon);
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-shadow: 0 0 10px var(--neon);
+}
+
+#start-button:hover {
+    background-color: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 0 20px var(--accent);
+    text-shadow: none;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  #game-container {
+    padding: 1rem;
+    height: auto;
+  }
+  #main-content {
+    flex-direction: column;
+  }
+  #hud {
+    /* In a real implementation, this would be a collapsible drawer */
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .hud-panel {
+    width: 48%;
+  }
+  #chat-pane {
+    min-height: 40vh;
+  }
+  .hud-panel p, .hud-panel span {
+    font-size: 1.2rem;
+  }
+}

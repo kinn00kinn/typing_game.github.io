@@ -1,0 +1,222 @@
+{
+  "phrases": [
+    {
+      "id": "p001",
+      "text": "Initializing neural network protocols.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p002",
+      "text": "Quantum entanglement secured.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "p003",
+      "text": "The quick brown fox jumps over the lazy dog.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "p004",
+      "text": "Compiling archaic subroutines.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p005",
+      "text": "Decrypting glyph-based encryption.",
+      "difficulty": "hard"
+    },
+    { "id": "p006", "text": "Hello, World!", "difficulty": "easy" },
+    {
+      "id": "p007",
+      "text": "Memory allocation optimized for psionic interface.",
+      "difficulty": "lunatic"
+    },
+    {
+      "id": "p008",
+      "text": "Rerouting power through crystalline conduits.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "p009",
+      "text": "A stitch in time saves nine.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "p010",
+      "text": "System.out.printlnJava is an ancient script.);",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p011",
+      "text": "Accessing the Akashic records.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p012",
+      "text": "The core matrix is stable.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "p013",
+      "text": "Bypassing the logic gates of time.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "p014",
+      "text": "sudo rm -rf / --no-preserve-root",
+      "difficulty": "lunatic"
+    },
+    {
+      "id": "p015",
+      "text": "Calibrating the soul-ether converters.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "p016",
+      "text": "To be, or not to be, that is the question.",
+      "difficulty": "normal"
+    },
+    { "id": "p017", "text": "There is no spoon.", "difficulty": "easy" },
+    {
+      "id": "p018",
+      "text": "Asynchronous data stream from the void.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p019",
+      "text": "42 is the answer to everything.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "p020",
+      "text": "SELECT * FROM ancient_artifacts WHERE type='power_source';",
+      "difficulty": "hard"
+    },
+    {
+      "id": "p021",
+      "text": "A journey of a thousand miles begins with a single step.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p022",
+      "text": "Activating the monolith's resonance frequency.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "p023",
+      "text": "The ghost in the machine is waking up.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p024",
+      "text": "All your base are belong to us.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "p025",
+      "text": "Binary solo! 010101000110100001100101.",
+      "difficulty": "lunatic"
+    },
+    { "id": "p026", "text": "Fortune favors the bold.", "difficulty": "easy" },
+    {
+      "id": "p027",
+      "text": "Parsing the command line arguments of fate.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p028",
+      "text": "The server is down, the sky is falling.",
+      "difficulty": "normal"
+    },
+    { "id": "p029", "text": "I think, therefore I am.", "difficulty": "easy" },
+    {
+      "id": "p030",
+      "text": "My other computer is a data-golem.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p031",
+      "text": "Casting rune-stones for a debug trace.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "p032",
+      "text": "It's not a bug, it's an undocumented feature.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "p033",
+      "text": "Re-aligning the celestial gear-train.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "p034",
+      "text": "The oracle predicts a stack overflow.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p035",
+      "text": "Never attribute to malice that which is adequately explained by stupidity.",
+      "difficulty": "hard"
+    },
+    { "id": "p036", "text": "Keep it simple, stupid.", "difficulty": "easy" },
+    {
+      "id": "p037",
+      "text": "Polishing the chrome on the time machine.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p038",
+      "text": "The ley-lines are humming with raw data.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p039",
+      "text": "Do not meddle in the affairs of wizards, for they are subtle and quick to anger.",
+      "difficulty": "hard"
+    },
+    { "id": "p040", "text": "I see dead pixels.", "difficulty": "easy" },
+    {
+      "id": "p041",
+      "text": "There are 10 types of people in the world: those who understand binary, and those who don't.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p042",
+      "text": "War is peace. Freedom is slavery. Ignorance is strength.",
+      "difficulty": "hard"
+    },
+    { "id": "p043", "text": "The cake is a lie.", "difficulty": "easy" },
+    {
+      "id": "p044",
+      "text": "Synthesizing a new dialect of Lisp from cosmic background radiation.",
+      "difficulty": "lunatic"
+    },
+    {
+      "id": "p045",
+      "text": "Have you tried turning it off and on again?",
+      "difficulty": "easy"
+    },
+    {
+      "id": "p046",
+      "text": "The monolith hums with a deep, resonant energy.",
+      "difficulty": "normal"
+    },
+    { "id": "p047", "text": "All glitter is not gold.", "difficulty": "easy" },
+    {
+      "id": "p048",
+      "text": "A fractal is a never-ending pattern.",
+      "difficulty": "normal"
+    },
+    {
+      "id": "p049",
+      "text": "The singularity is closer than it appears.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "p050",
+      "text": "Beware of off-by-one errors in the fabric of reality.",
+      "difficulty": "lunatic"
+    }
+  ]
+}
