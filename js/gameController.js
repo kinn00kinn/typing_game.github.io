@@ -40,6 +40,8 @@ const state = {
     difficulty: 'normal',
     intervalId: null,
     lastGameResults: null,
+    isGameStarted: false,
+    hasUserTyped: false,
 };
 
 /**
@@ -86,9 +88,9 @@ function startGame() {
     updateHUD();
     nextPhrase();
 
-    state.intervalId = setInterval(tick, 1000);
+    // state.intervalId = setInterval(tick, 1000);
     renderer.toggleStartScreen(false);
-    inputManager.focus();
+    inputManager.focus(); // Ensure input is focused after game starts
     // audioManager.play('start');
 }
 
@@ -98,6 +100,8 @@ function startGame() {
 function endGame() {
     clearInterval(state.intervalId);
     state.status = 'finished';
+    state.isGameStarted = false; // Reset flag
+    state.hasUserTyped = false; // Reset flag
     audioManager.play('end');
 
     const accuracy = state.totalTyped > 0 ? (state.totalCorrect / state.totalTyped) * 100 : 0;
@@ -181,6 +185,13 @@ function nextPhrase() {
 function handleInput(typedText) {
     if (state.status !== 'playing') return;
 
+    // Start timer on first character
+    if (!state.isGameStarted && typedText.length === 1 && typedText.trim() !== '') {
+        state.isGameStarted = true;
+        state.intervalId = setInterval(tick, 1000);
+        // Optional: audioManager.play('game_start_sound');
+    }
+
     renderer.updateInputDisplay(state.currentPhrase.text, typedText);
 
     const lastCharIndex = typedText.length - 1;
@@ -255,4 +266,5 @@ export const gameController = {
     init,
     startGame,
     getLastGameResults: () => state.lastGameResults,
+    focusInput: () => inputManager.focus(), // Expose inputManager's focus
 };

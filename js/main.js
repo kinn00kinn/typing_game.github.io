@@ -101,4 +101,13 @@ if (!startButton || !playAgainButton || !settingsButton || !muteButton || !theme
             startButton.click();
         }
     });
+
+    // Listener for difficulty select to regain focus
+    if (difficultySelect) {
+        difficultySelect.addEventListener('change', () => {
+            setTimeout(() => {
+                gameController.focusInput();
+            }, 0);
+        });
+    }
 }

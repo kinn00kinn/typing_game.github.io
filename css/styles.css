@@ -11,6 +11,7 @@
   --radius: 12px;
   --font-mono: 'Space Mono', ui-monospace, monospace;
   --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto;
+
 }
 
 /* Light Theme */
@@ -123,10 +124,10 @@ body {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem; /* Reduced gap */
   font-family: var(--font-mono);
-  font-size: 1.25rem;
-  line-height: 1.7;
+  font-size: 1.3rem; /* Increased font size */
+  line-height: 1.6; /* Slightly reduced line height */
 }
 
 .system-bubble, .user-bubble {
@@ -186,32 +187,32 @@ body {
   flex: 3; /* 30% */
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.25rem;
 }
 
 .hud-panel {
   background-color: var(--panel);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius);
-  padding: 1.5rem;
+  padding: 0.5rem;
 }
 
 .hud-panel h3 {
   font-family: var(--font-mono);
   color: var(--neon);
-  margin-bottom: 1rem;
-  font-size: 1rem;
+  margin-bottom: 0.25rem; /* Reduced margin */
+  font-size: 1.5rem; /* Increased font size */
   text-transform: uppercase;
 }
 
 .hud-panel p, .hud-panel span, .hud-panel li {
   font-family: var(--font-mono);
-  font-size: 1.5rem;
+  font-size: 1.3rem; /* Adjusted font size */
 }
 #quest-list {
     list-style: none;
-    font-size: 1rem;
-    line-height: 1.8;
+    font-size: 0.95rem; /* Adjusted font size */
+    line-height: 1.7; /* Adjusted line height */
 }
 #quest-list li.completed {
     text-decoration: line-through;
@@ -224,9 +225,9 @@ body {
     color: var(--text);
     border: 1px solid var(--panel-border);
     border-radius: 4px;
-    padding: 0.5rem;
+    padding: 0.2rem 0.3rem; /* Adjusted padding */
     font-family: var(--font-mono);
-    font-size: 1rem;
+    font-size: 1.5rem; /* Increased font size */
 }
 #difficulty-select:focus {
     outline: 1px solid var(--neon);
