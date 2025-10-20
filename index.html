@@ -1,124 +1,178 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AncientTech — Typing Game</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6499999959945648"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <div id="game-container">
-        <header id="game-header">
-            <div class="logo">
-                <!-- Placeholder for ancient crest icon -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="var(--neon)" stroke-width="2" stroke-linejoin="round"/>
-                    <path d="M2 17L12 22L22 17" stroke="var(--neon)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 12L12 17L22 12" stroke="var(--neon)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <h1>AncientTech</h1>
-                <a href="https://github.com/kinn00kinn/typing_game.github.io" target="_blank" class="github-link">GitHub</a>
-            </div>
-            <div class="settings">
-                <button id="settings-button" aria-label="Settings">
-                    <!-- Placeholder for settings icon -->
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.48.48 0 0 0-.58-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41H9.18a.48.48 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.48.48 0 0 0-.58.22L2.03 8.81a.49.49 0 0 0 .12.61l2.03 1.58c-.05.3-.07.64-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.58.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54a.48.48 0 0 0 .48.41h3.64a.48.48 0 0 0 .48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.21.08.46 0 .58-.22l1.92-3.32a.49.49 0 0 0-.12-.61l-2.01-1.58zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" fill="var(--neon)"/></svg>
-                </button>
-                <div id="settings-panel" class="hidden">
-                    <button id="mute-button">Mute Audio</button>
-                    <button id="theme-toggle-button">Toggle Theme</button>
-                    <button id="history-button">Game History</button>
-                </div>
-            </div>
-        </header>
-
-        <main id="main-content">
-            <section id="chat-pane">
-                <div id="messages">
-                    <!-- Game messages will appear here -->
-                </div>
-                <div id="input-area">
-                    <div class="user-bubble">
-                        <span id="user-input-display"><span class="cursor">_</span></span>
-                    </div>
-                    <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-                </div>
-            </section>
-
-            <aside id="hud">
-                <div class="hud-panel">
-                    <h3>Timer</h3>
-                    <p id="timer">60</p>
-                </div>
-                <div class="hud-panel">
-                    <h3>Score</h3>
-                    <p id="score">0</p>
-                </div>
-                <div class="hud-panel">
-                    <h3>Stats</h3>
-                    <p>Miss: <span id="miss-count">0</span></p>
-                    <p>Combo: <span id="combo-count">0</span></p>
-                </div>
-                <div class="hud-panel" id="quest-hud">
-                    <h3>Challenge Quest</h3>
-                    <ul id="quest-list">
-                        <!-- Active quests will be listed here -->
-                    </ul>
-                </div>
-                <div class="hud-panel">
-                    <h3>Difficulty</h3>
-                    <select id="difficulty-select">
-                        <option value="easy">EASY</option>
-                        <option value="normal" selected>NORMAL</option>
-                        <option value="hard">HARD</option>
-                        <option value="lunatic">LUNATIC</option>
-                    </select>
-                </div>
-            </aside>
-        </main>
-        
-        <div id="start-screen">
-            <button id="start-button">Start Game</button>
+      <header id="game-header">
+        <div class="logo">
+          <!-- Placeholder for ancient crest icon -->
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2L2 7L12 12L22 7L12 2Z"
+              stroke="var(--neon)"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M2 17L12 22L22 17"
+              stroke="var(--neon)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M2 12L12 17L22 12"
+              stroke="var(--neon)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <h1>AncientTech</h1>
+          <a
+            href="https://github.com/kinn00kinn/typing_game.github.io"
+            target="_blank"
+            class="github-link"
+            >GitHub</a
+          >
         </div>
-
-        <div id="results-screen" style="display: none;">
-            <div class="results-panel">
-                <h2>Results</h2>
-                <div class="result-item">
-                    <span>Score</span>
-                    <span id="results-score">0</span>
-                </div>
-                <div class="result-item">
-                    <span>Accuracy</span>
-                    <span id="results-accuracy">0%</span>
-                </div>
-                <div class="result-item">
-                    <span>WPM</span>
-                    <span id="results-wpm">0</span>
-                </div>
-                <div class="chart-container">
-                    <canvas id="results-chart"></canvas>
-                </div>
-                <button id="play-again-button">Play Again</button>
-                <button id="share-twitter-button">Share on Twitter</button>
-            </div>
+        <div class="settings">
+          <button id="settings-button" aria-label="Settings">
+            <!-- Placeholder for settings icon -->
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.48.48 0 0 0-.58-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41H9.18a.48.48 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.48.48 0 0 0-.58.22L2.03 8.81a.49.49 0 0 0 .12.61l2.03 1.58c-.05.3-.07.64-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.58.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54a.48.48 0 0 0 .48.41h3.64a.48.48 0 0 0 .48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.21.08.46 0 .58-.22l1.92-3.32a.49.49 0 0 0-.12-.61l-2.01-1.58zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"
+                fill="var(--neon)"
+              />
+            </svg>
+          </button>
+          <div id="settings-panel" class="hidden">
+            <button id="mute-button">Mute Audio</button>
+            <button id="theme-toggle-button">Toggle Theme</button>
+            <button id="history-button">Game History</button>
+          </div>
         </div>
+      </header>
 
-        <div id="history-screen" class="full-screen-panel hidden">
-            <div class="history-panel results-panel">
-                <h2>Game History</h2>
-                <div class="chart-container-large">
-                    <canvas id="history-chart"></canvas>
-                </div>
-                <button id="close-history-button">Close</button>
+      <main id="main-content">
+        <section id="chat-pane">
+          <div id="messages">
+            <!-- Game messages will appear here -->
+          </div>
+          <div id="input-area">
+            <div class="user-bubble">
+              <span id="user-input-display"><span class="cursor">_</span></span>
             </div>
+            <input
+              type="text"
+              id="hidden-input"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+            />
+          </div>
+        </section>
+
+        <aside id="hud">
+          <div class="hud-panel">
+            <h3>Timer</h3>
+            <p id="timer">60</p>
+          </div>
+          <div class="hud-panel">
+            <h3>Score</h3>
+            <p id="score">0</p>
+          </div>
+          <div class="hud-panel">
+            <h3>Stats</h3>
+            <p>Miss: <span id="miss-count">0</span></p>
+            <p>Combo: <span id="combo-count">0</span></p>
+          </div>
+          <div class="hud-panel" id="quest-hud">
+            <h3>Challenge Quest</h3>
+            <ul id="quest-list">
+              <!-- Active quests will be listed here -->
+            </ul>
+          </div>
+          <div class="hud-panel">
+            <h3>Difficulty</h3>
+            <select id="difficulty-select">
+              <option value="easy">EASY</option>
+              <option value="normal" selected>NORMAL</option>
+              <option value="hard">HARD</option>
+              <option value="lunatic">LUNATIC</option>
+            </select>
+          </div>
+        </aside>
+      </main>
+
+      <div id="start-screen">
+        <button id="start-button">Start Game</button>
+      </div>
+
+      <div id="results-screen" style="display: none">
+        <div class="results-panel">
+          <h2>Results</h2>
+          <div class="result-item">
+            <span>Score</span>
+            <span id="results-score">0</span>
+          </div>
+          <div class="result-item">
+            <span>Accuracy</span>
+            <span id="results-accuracy">0%</span>
+          </div>
+          <div class="result-item">
+            <span>WPM</span>
+            <span id="results-wpm">0</span>
+          </div>
+          <div class="chart-container">
+            <canvas id="results-chart"></canvas>
+          </div>
+          <button id="play-again-button">Play Again</button>
+          <button id="share-twitter-button">Share on Twitter</button>
         </div>
+      </div>
+
+      <div id="history-screen" class="full-screen-panel hidden">
+        <div class="history-panel results-panel">
+          <h2>Game History</h2>
+          <div class="chart-container-large">
+            <canvas id="history-chart"></canvas>
+          </div>
+          <button id="close-history-button">Close</button>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/main.js" type="module"></script>
-</body>
+  </body>
 </html>
